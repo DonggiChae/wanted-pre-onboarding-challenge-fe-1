@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios, {  AxiosError } from 'axios';
 import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
-import { Todo , TodoInput ,createTodo , ResponseData} from "./TodosApi";
+import { Todo , TodoInput ,createTodo , ResponseData} from "../../API/TodosApi";
 
 const Container = styled.div`
 

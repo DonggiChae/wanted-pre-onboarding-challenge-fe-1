@@ -1,14 +1,14 @@
 import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { logIn, signUp, AuthResponse } from "./AuthApi";
+import { logIn, signUp, AuthResponse } from "../../API/AuthApi";
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom } from "../../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../../Atoms";
 
 const LogInContatiner = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #395B64;
+  background-color: rgb(231, 246, 242);
   padding: 50px;
   border-radius: 10px;
 `;
@@ -43,7 +43,8 @@ const AuthForm = () => {
   const [submitButton, setSubmitButton] = useState(false);
   const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
   const [error, setError] = useState("");
-  const [ stateSignUp, setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom)
+  const [ stateSignUp, setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom);
+  const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
   const navigate = useNavigate();
   const onChange = (event:any) => {
     const {
@@ -65,12 +66,12 @@ const AuthForm = () => {
       })).catch(error => {alert(error.response.data.details)})
     } else {
       logIn(email, password).then((data=> {
-        const { message, token } = data as AuthResponse
-        localStorage.setItem('token', token)
-        alert(message)
-        console.log(message, token)
+        const { message, token } = data as AuthResponse;
+        localStorage.setItem('token', token);
+        setStatehastokenAtom(true);
+        alert(message);
         if (token) {
-          navigate("/todos")
+          navigate("/todos");
         }
       })).catch(error => {alert(error.response.data.details)})
     }
@@ -78,6 +79,7 @@ const AuthForm = () => {
 
   useEffect (() => {
     if (localStorage.getItem("token")) {
+      setStatehastokenAtom(true);
       navigate("/todos")
     }
   },[]);

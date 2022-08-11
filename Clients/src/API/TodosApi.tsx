@@ -24,10 +24,9 @@ export const axiosConfig: AxiosRequestConfig = {
 
 const client = axios.create(axiosConfig);
 
-client.defaults.headers.common.Authorization = localStorage.getItem('token') || ''
+client.defaults.headers.common['Authorization'] = localStorage.getItem('token') || ''
 
 export const getTodos = async () => {
-
     const response = await client.get('')
     return response.data
 }

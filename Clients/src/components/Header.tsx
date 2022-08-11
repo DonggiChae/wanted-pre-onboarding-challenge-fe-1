@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom } from "../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../Atoms";
+import { useNavigate } from "react-router-dom";
 
 
 const Nav = styled.nav`
@@ -15,7 +16,7 @@ const Nav = styled.nav`
   font-weight: 500;
   padding: 20px 60px;
   color: white;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgb(44, 51, 51);
 `;
 
 const Col = styled.div`
@@ -44,10 +45,30 @@ const TodoSignIn = styled.div`
   padding: 20px 30px;
   cursor: pointer;
 `
+const TodoSignOut = styled.div`
+  margin-left: auto;
+  padding: 20px 30px;
+  cursor: pointer;
+`
 
 
 function Header() {
-  const [ stateSignUp , setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom)
+  const [ stateSignUp , setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom);
+  const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
+  const navigate = useNavigate();
+  const onLogOut = () => {
+    localStorage.removeItem('token');
+    setStatehastokenAtom(false)
+    navigate("/")
+  }
+  useEffect (() => {
+    if (localStorage.getItem('token')) {
+      setStatehastokenAtom(true)
+    } else {
+      setStatehastokenAtom(false)
+      navigate("/")
+    }
+  },[statehastokenAtom]);
   return (
     <Nav>
       <Col>
@@ -55,14 +76,21 @@ function Header() {
       <Todologo>
           Todo
       </Todologo>
-      <Col>
-        <TodoSignUp onClick={() => setStateSignUP(true)}>
-          SignUp
-        </TodoSignUp>
-        <TodoSignIn onClick={() => setStateSignUP(false)}>
-          SignIn
-        </TodoSignIn>
-      </Col>
+      {statehastokenAtom ? 
+        <Col>
+        <TodoSignOut onClick={() => onLogOut()}>
+          SignOut
+        </TodoSignOut>
+        </Col>
+        : 
+        <Col>
+          <TodoSignUp onClick={() => setStateSignUP(true)}>
+            SignUp
+          </TodoSignUp>
+          <TodoSignIn onClick={() => setStateSignUP(false)}>
+            SignIn
+          </TodoSignIn>
+        </Col>}
     </Nav>
   );
 }

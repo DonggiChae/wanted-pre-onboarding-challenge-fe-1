@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import { useQuery } from '@tanstack/react-query'
-import { Todo, getTodoById,ResponseData } from "./TodosApi";
+import { Todo, getTodoById,ResponseData } from "../../API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
 
 
