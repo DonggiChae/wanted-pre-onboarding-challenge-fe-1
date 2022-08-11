@@ -2,6 +2,8 @@ import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logIn, signUp, AuthResponse } from "./AuthApi";
+import { useRecoilState } from "recoil";
+import { stateSignUpAtom } from "../../Atoms";
 
 const LogInContatiner = styled.div`
   display: flex;
@@ -11,11 +13,11 @@ const LogInContatiner = styled.div`
   border-radius: 10px;
 `;
 
-const Todologo = styled.div`
+const SignUPlogo = styled.div`
   font-family: 'Roboto Condensed',sans-serif;
   text-align: center;
-  font-weight: 700;
-  font-size: 100px;
+  font-weight: 600;
+  font-size: 50px;
   margin-bottom: 100px;
 `
 
@@ -42,6 +44,7 @@ const AuthForm = () => {
   const [submitButton, setSubmitButton] = useState(false);
   const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
   const [error, setError] = useState("");
+  const [ stateSignUp, setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom)
   const navigate = useNavigate();
   const onChange = (event:any) => {
     const {
@@ -89,7 +92,9 @@ const AuthForm = () => {
   },[password, email]);
   return (
     <LogInContatiner>
-      <Todologo>TODO</Todologo>
+      <SignUPlogo>
+        { stateSignUp ? "Sign Up" : "Sign In"}
+      </SignUPlogo>
       <LogInFormContatiner>
         <LogInForm onSubmit={onSubmit} className="container">
           <InputBox
@@ -115,13 +120,10 @@ const AuthForm = () => {
             <input
             type="submit"
             className="authInput authSubmit"
-            value={newAccount ? "Create Account" : "Sign In"}
+            value={ stateSignUp ? "Sign Up" : "Sign In"}
             />
-            <div onClick={toggleAccount} className="authSwitch">
-              {newAccount ? "Sign In" : "Create Account"}
             </div>
-            </div>
-          : <></>}
+          : <div></div>}
         </LogInForm>
       </LogInFormContatiner>
     </LogInContatiner>

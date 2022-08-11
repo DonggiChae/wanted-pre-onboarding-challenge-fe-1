@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const isTodoDetailAtom = atom<boolean>({
-  key: "isTodoDetail",
+export const stateSignUpAtom = atom<boolean>({
+  key: "stateSignUp",
   default: false,
 });
