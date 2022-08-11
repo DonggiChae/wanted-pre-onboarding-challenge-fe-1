@@ -3,9 +3,36 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logIn, signUp, AuthResponse } from "./AuthApi";
 
-const inputStyles = styled.div`
-
+const LogInContatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #395B64;
+  padding: 50px;
+  border-radius: 10px;
 `;
+
+const Todologo = styled.div`
+  font-family: 'Roboto Condensed',sans-serif;
+  text-align: center;
+  font-weight: 700;
+  font-size: 100px;
+  margin-bottom: 100px;
+`
+
+const LogInFormContatiner = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LogInForm = styled.form`
+  display: flex;
+  flex-direction: column;
+
+`
+
+const InputBox = styled.input`
+
+`
 
 
 const AuthForm = () => {
@@ -61,38 +88,43 @@ const AuthForm = () => {
       setSubmitButton(true) : setSubmitButton(false)}
   },[password, email]);
   return (
-    <>
-      <form onSubmit={onSubmit} className="container">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          value={email}
-          onChange={onChange}
-          className="authInput"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          value={password}
-          onChange={onChange}
-          className="authInput"
-          minLength={8}
-        />
-        {submitButton ? <input
-          type="submit"
-          className="authInput authSubmit"
-          value={newAccount ? "Create Account" : "Sign In"}
-        />: <></>}
-        {error && <span className="authError">{error}</span>}
-      </form>
-      <span onClick={toggleAccount} className="authSwitch">
-        {newAccount ? "Sign In" : "Create Account"}
-      </span>
-    </>
+    <LogInContatiner>
+      <Todologo>TODO</Todologo>
+      <LogInFormContatiner>
+        <LogInForm onSubmit={onSubmit} className="container">
+          <InputBox
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={onChange}
+            className="authInput"
+          />
+          <InputBox
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={onChange}
+            className="authInput"
+            minLength={8}
+          />
+          {submitButton ? <div>
+            <input
+            type="submit"
+            className="authInput authSubmit"
+            value={newAccount ? "Create Account" : "Sign In"}
+            />
+            <div onClick={toggleAccount} className="authSwitch">
+              {newAccount ? "Sign In" : "Create Account"}
+            </div>
+            </div>
+          : <></>}
+        </LogInForm>
+      </LogInFormContatiner>
+    </LogInContatiner>
   );
 };
 export default AuthForm;
