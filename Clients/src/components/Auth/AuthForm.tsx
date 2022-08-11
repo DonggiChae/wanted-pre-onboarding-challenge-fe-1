@@ -40,7 +40,6 @@ const InputBox = styled.input`
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
   const [submitButton, setSubmitButton] = useState(false);
   const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
   const [error, setError] = useState("");
@@ -59,7 +58,7 @@ const AuthForm = () => {
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
-    if (newAccount) {
+    if (stateSignUp) {
       signUp(email, password).then((data => {
         const { message } = data as AuthResponse
         alert(message)
@@ -76,9 +75,6 @@ const AuthForm = () => {
       })).catch(error => {alert(error.response.data.details)})
     }
   };
-
-  const toggleAccount = () => setNewAccount((prev) => !prev);
-
 
   useEffect (() => {
     if (localStorage.getItem("token")) {
