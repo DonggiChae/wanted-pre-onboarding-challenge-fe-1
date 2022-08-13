@@ -42,7 +42,6 @@ const AuthForm = () => {
   const [password, setPassword] = useState("");
   const [submitButton, setSubmitButton] = useState(false);
   const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
-  const [error, setError] = useState("");
   const [ stateSignUp, setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom);
   const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
   const navigate = useNavigate();

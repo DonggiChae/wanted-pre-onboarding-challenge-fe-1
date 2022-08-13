@@ -2,7 +2,7 @@ import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import fs from "fs/promises";
 import { useQuery } from '@tanstack/react-query'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Todo, ResponseDatas, getTodos, getTodoById } from "../../API/TodosApi";
 import TodoDetail from "./TodoDetail";
 import CreateTodo from "./CreateTodo";
@@ -45,11 +45,19 @@ const TodoList = () => {
   const [ toDoDetailId , setToDoDetailId ] = useState("");
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
   const  { data: todos , isLoading }  = useQuery<ResponseDatas>(['todo'], getTodos);
+  const toDoID = localStorage.getItem("ToDoId");
   const onTodoClicked = (id: string) => {
     setToDoDetailId(id);
+    localStorage.setItem("ToDoId", id);
   };
   
   const onCreateTodoToggle = () => setCreateTodo((prev) => (!prev));
+
+  useEffect(() => {
+    if (toDoID) {
+      setToDoDetailId(toDoID)
+    }
+  },[])
 
   return (
     <Container>

@@ -57,7 +57,7 @@ function Header() {
   const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
   const navigate = useNavigate();
   const onLogOut = () => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     setStatehastokenAtom(false)
     navigate("/")
   }
