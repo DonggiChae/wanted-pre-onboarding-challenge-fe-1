@@ -1,9 +1,10 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import { useQuery } from '@tanstack/react-query'
-import { Todo, getTodoById,ResponseData } from "../../API/TodosApi";
+import { Todo, getTodoById, ResponseDatas } from "../../API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
-
+import { stateTodoUpdateAtom } from "../../Atoms";
+import { useRecoilState } from "recoil";
 
 const Container = styled.div`
 
@@ -39,19 +40,24 @@ const UpdateButton = styled.button`
 
 const TodoDetail = (props: any) => {
   const [todoData , setTodoData] = useState<Todo | undefined>(undefined)
-  const [updateToggle, setUpdateToggle] = useState(false)
+  const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
   useEffect(() => {
     getTodoById(props.toDoId).then((res)=>
     setTodoData(res.data));
   },[props.toDoId])
   const onUpdateToggle = () => {
-    setUpdateToggle((prev) => (!prev));
+    setStateTodoUpdate((prev) => (!prev));
   }
   return (
     <Container>
       <Board>
         <UpdateButton onClick={onUpdateToggle}>UPDATE</UpdateButton>
-        {updateToggle ? <UpdateTodo {...todoData}></UpdateTodo>: 
+        {stateTodoUpdate ? 
+        <Board>
+          <UpdateTodo {...todoData}></UpdateTodo>
+          <UpdateButton onClick={onUpdateToggle}>Cancel</UpdateButton>
+        </Board>
+        : 
         <Board>
           <TodoTitle>
             {todoData?.title}

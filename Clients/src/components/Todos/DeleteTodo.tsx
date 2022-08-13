@@ -1,7 +1,7 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
 import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
-import { Todo , TodoInput , deleteTodo, ResponseData} from "../../API/TodosApi";
+import { Todo , TodoInput , deleteTodo, ResponseDatas } from "../../API/TodosApi";
 
 const Container = styled.div`
 

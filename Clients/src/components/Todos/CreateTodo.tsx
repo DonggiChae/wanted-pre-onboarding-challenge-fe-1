@@ -1,21 +1,12 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
-import axios, {  AxiosError } from 'axios';
 import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
-import { Todo , TodoInput ,createTodo , ResponseData} from "../../API/TodosApi";
+import { Todo , TodoInput ,createTodo , ResponseDatas } from "../../API/TodosApi";
 
 const Container = styled.div`
 
 `
-
-
-interface todotitleProps {
-  index: number,
-  toDoId: string,
-  onClick: any
-
-}
 
 const TodoForm = styled.form`
 
