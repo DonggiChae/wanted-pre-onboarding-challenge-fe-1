@@ -8,7 +8,7 @@ import TodoDetail from "./TodoDetail";
 import CreateTodo from "./CreateTodo";
 import DeleteTodo from "./DeleteTodo";
 
-import { useRecoilState } from "recoil";
+import { constSelector, useRecoilState } from "recoil";
 import { todoListAtom } from "../../Atoms";
 
 
@@ -28,7 +28,6 @@ const CreateTodoToggleButton = styled.button`
 
 interface todotitleProps {
   index: number,
-  toDoId: string,
   onClick: any
 
 }
@@ -36,43 +35,55 @@ interface todotitleProps {
 const TodoTitle = styled.div<todotitleProps>`
 
 `;
+const Button = styled.button`
+`
 
 
 
 const TodoList = () => {
   const navigate = useNavigate();
+  const { todoID } = useParams();
   const [ createTodo, setCreateTodo] = useState(true)
   const [ toDoDetailId , setToDoDetailId ] = useState("");
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
   const  { data: todos , isLoading }  = useQuery<ResponseDatas>(['todo'], getTodos);
-  const toDoID = localStorage.getItem("ToDoId");
   const onTodoClicked = (id: string) => {
     setToDoDetailId(id);
-    localStorage.setItem("ToDoId", id);
+    navigate(id);
   };
   
   const onCreateTodoToggle = () => setCreateTodo((prev) => (!prev));
 
   useEffect(() => {
-    if (toDoID) {
-      setToDoDetailId(toDoID)
+    if (todoID){
+      setToDoDetailId(todoID);
     }
-  },[])
+  },[navigate, TodoDetail])
+
+  useEffect(() => {
+    if (todos){
+      setStateTodoListAtom([...todos.data]);
+      }
+  },[todos])
 
   return (
     <Container>
+      <Button onClick={ () => navigate(-1)}>Go 1 pages back</Button>
+      <Button onClick={ () => navigate(1) }>Go 1 Page forward</Button>
       <Board>
           {isLoading ? <Board></Board> 
-          : todos?.data.map((toDo, index: number ) => (
-            <TodoTitle   
-            key={toDo.id}
-            index={index}
-            toDoId={toDo.id}
-            onClick={() => onTodoClicked(toDo.id)}
-            >
-              {toDo.title}
+          : stateTodoListAtom.map((toDo, index: number ) => (
+            <Board> 
+              <TodoTitle   
+                key={toDo.id}
+                index={index}
+                onClick={() => onTodoClicked(toDo.id)}
+                >
+                {toDo.title}
+              </TodoTitle>
               <DeleteTodo toDoId={toDo.id}/>
-            </TodoTitle>
+            </Board> 
+            
             
           ))
         }
@@ -83,7 +94,7 @@ const TodoList = () => {
           : <CreateTodo></CreateTodo>}
         </Board>
         <Board>
-          {toDoDetailId ? <TodoDetail toDoId={toDoDetailId} />
+          { toDoDetailId ? <TodoDetail toDoId={toDoDetailId} />
           : <></>}
         </Board>
     </Container>

@@ -56,24 +56,27 @@ function Header() {
   const [ stateSignUp , setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom);
   const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
   const navigate = useNavigate();
+  const  goTodoHome = () => {
+    navigate("/todos");
+  } 
   const onLogOut = () => {
     localStorage.clear();
-    setStatehastokenAtom(false)
-    navigate("/")
+    setStatehastokenAtom(false);
+    navigate("/");
   }
   useEffect (() => {
     if (localStorage.getItem('token')) {
-      setStatehastokenAtom(true)
+      setStatehastokenAtom(true);
     } else {
-      setStatehastokenAtom(false)
-      navigate("/")
+      setStatehastokenAtom(false);
+      navigate("/");
     }
   },[statehastokenAtom]);
   return (
     <Nav>
       <Col>
       </Col>
-      <Todologo>
+      <Todologo onClick={() => goTodoHome()}>
           Todo
       </Todologo>
       {statehastokenAtom ? 

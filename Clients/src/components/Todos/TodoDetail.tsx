@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import { useQuery } from '@tanstack/react-query'
+import { useNavigate, useParams } from "react-router-dom";
 import { Todo, getTodoById, ResponseDatas } from "../../API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
 import { stateTodoUpdateAtom } from "../../Atoms";
@@ -36,15 +37,19 @@ const UpdateButton = styled.button`
 
 `;
 
+interface tododetailProps {
+  toDoId: string,
+}
 
 
-const TodoDetail = (props: any) => {
-  const [todoData , setTodoData] = useState<Todo | undefined>(undefined)
+
+const TodoDetail = (props: tododetailProps) => {
+  const [ todoData , setTodoData] = useState<Todo | undefined>(undefined)
   const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
   useEffect(() => {
-    getTodoById(props.toDoId).then((res)=>
-    setTodoData(res.data));
-  },[props.toDoId])
+      getTodoById(props.toDoId).then((res)=>
+      setTodoData(res.data));
+  },[props])
   const onUpdateToggle = () => {
     setStateTodoUpdate((prev) => (!prev));
   }

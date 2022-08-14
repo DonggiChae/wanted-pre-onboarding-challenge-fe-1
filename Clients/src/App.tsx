@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Authorize />}>
           </Route>
           <Route path="/todos" element={<Todos />}>
-            <Route path="/todos/:index" element={<Todos />} />
+            <Route path="/todos/:todoID" element={<Todos />} />
           </Route>
         </Routes>
     </BrowserRouter>

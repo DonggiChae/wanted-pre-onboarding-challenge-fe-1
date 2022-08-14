@@ -14,8 +14,6 @@ export interface ResponseDatas {
   data: Todo[]
 }
 
-
-
 export const axiosConfig: AxiosRequestConfig = {
   baseURL: 'http://127.0.0.1:8080/todos',
 };

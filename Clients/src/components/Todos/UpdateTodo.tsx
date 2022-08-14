@@ -2,7 +2,7 @@ import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
 import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
 import { Todo , updateTodo, ResponseDatas} from "../../API/TodosApi";
-import { stateTodoUpdateAtom } from "../../Atoms";
+import { stateTodoUpdateAtom , todoListAtom} from "../../Atoms";
 import { useRecoilState } from "recoil";
 
 const Container = styled.div`
@@ -34,10 +34,15 @@ const UpdateTodo = (props: any) => {
   const [title, setTitle] = useState(`${props.title}`);
   const [content, setContent] = useState(`${props.content}`);
   const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
+  const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
   const onUpdate = (event :any) => {
     event.preventDefault()
-    updateTodo(props.id, title, content).then(() => setStateTodoUpdate((prev) => (!prev)))
-
+    updateTodo(props.id, title, content).then(
+      (res) => setStateTodoListAtom( 
+          stateTodoListAtom.map((todo) => 
+          (todo.id === props.id ? res.data : todo))
+          )
+      ).then(() => setStateTodoUpdate((prev) => (!prev)))
   };
 
   const onChange = (event: any) => {
