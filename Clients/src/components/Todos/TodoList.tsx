@@ -83,8 +83,6 @@ const TodoList = () => {
               </TodoTitle>
               <DeleteTodo toDoId={toDo.id}/>
             </Board> 
-            
-            
           ))
         }
         </Board>

@@ -1,7 +1,9 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
-import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
-import { ITodo , deleteTodo,ITodoResponseDatas } from "../../API/TodosApi";
+import { useQueryClient ,useQuery, useMutation} from '@tanstack/react-query'
+
+import { AxiosError } from "axios";
+import { ITodo , deleteTodoResponse, ITodoResponseDatas } from "../../API/TodosApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../Atoms";
@@ -14,22 +16,30 @@ const Button = styled.button`
 
 `
 
+interface toDoIdProps {
+  toDoId: string,
+}
 
-const DeleteTodo = (Id : any) => {
+const DeleteTodo = (Id : toDoIdProps) => {
   const navigate = useNavigate()
   const { todoID } = useParams();
   const queryClient = useQueryClient();
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
+  const deleteTodo = useMutation<ITodo, AxiosError, string, unknown>(
+    ((Id) => deleteTodoResponse(Id)))
 
   const onDelete = (e :any) => {
     e.preventDefault();
-    deleteTodo( Id.toDoId );
-    setStateTodoListAtom(
-      stateTodoListAtom.filter((todo: ITodo) => todo.id !== Id.toDoId)
-    );
     if (Id.toDoId === todoID) {
       navigate('/todos');
     }
+    deleteTodo.mutate(Id.toDoId, {
+      onSuccess: () => {
+        setStateTodoListAtom(
+          stateTodoListAtom.filter((todo: ITodo) => todo.id !== Id.toDoId)
+        );
+      }
+    })
   };
 
 

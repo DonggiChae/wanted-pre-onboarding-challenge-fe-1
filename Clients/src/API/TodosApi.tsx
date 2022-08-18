@@ -10,6 +10,7 @@ export interface ITodo {
 
 export type ITodoInput = Pick<ITodo, "title" | "content">;
 
+
 export interface ITodoUpdateInput {
   title: string;
   content: string;
@@ -44,12 +45,12 @@ export const getTodoByIdResponse = async (id: string): Promise<ITodo> => {
     return res.data.data
 }
 
-export const updateTodoResponse = async (id: string, title: string, content: string) => {
+export const updateTodoResponse = async (id: string, title: string, content: string): Promise<ITodo> => {
     const res= await client.put(`/${id}`, { title, content })
     return res.data.data
 }
 
-export const deleteTodo = async (id: string) => {
-    const response = await client.delete(`/${id}`)
-    return response.data
+export const deleteTodoResponse = async (id: string): Promise<ITodo> => {
+    const res = await client.delete(`/${id}`)
+    return res.data.data
 }
