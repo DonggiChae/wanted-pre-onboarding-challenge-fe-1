@@ -1,15 +1,5 @@
 import { atom } from "recoil";
-import { ITodoResponseDatas , ITodo } from "./API/TodosApi";
-
-export const stateSignUpAtom = atom<boolean>({
-  key: "stateSignUp",
-  default: false,
-});
-
-export const hastokenAtom = atom<boolean>({
-  key: "token",
-  default: false,
-});
+import { ITodoResponseDatas , ITodo } from "../API/TodosApi";
 
 export const stateTodoUpdateAtom = atom<boolean>({
   key: "stateTodoDetail",

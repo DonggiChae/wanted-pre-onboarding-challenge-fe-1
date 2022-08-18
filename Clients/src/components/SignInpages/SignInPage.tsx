@@ -7,7 +7,7 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
 
 const LogInContatiner = styled.div`
   display: flex;
@@ -15,6 +15,8 @@ const LogInContatiner = styled.div`
   background-color: rgb(231, 246, 242);
   padding: 50px;
   border-radius: 10px;
+  width: 300px;
+  height: 230px;
 `;
 
 const SignUPlogo = styled.div`
@@ -23,6 +25,7 @@ const SignUPlogo = styled.div`
   font-weight: 600;
   font-size: 50px;
   margin-bottom: 20px;
+  color: rgb(44, 51, 51, 0.7);
 `
 
 const LogInFormContatiner = styled.div`
@@ -50,7 +53,7 @@ const SignInPage = () => {
   return (
     <LogInContatiner>
       <SignUPlogo>
-        { stateSignUp ? "SignUp"  : "SignIn"}
+        { stateSignUp ? "Sign Up"  : "Sign In"}
       </SignUPlogo>
       <LogInFormContatiner>
         { stateSignUp ? <SignUpForm /> : <SignInForm />}

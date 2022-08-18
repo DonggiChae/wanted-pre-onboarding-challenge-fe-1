@@ -9,7 +9,7 @@ import CreateTodo from "./CreateTodo";
 import DeleteTodo from "./DeleteTodo";
 
 import { constSelector, useRecoilState } from "recoil";
-import { todoListAtom } from "../../Atoms";
+import { todoListAtom } from "../../Atoms/TodosAtoms";
 
 
 

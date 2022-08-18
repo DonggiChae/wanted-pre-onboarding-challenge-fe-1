@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../Atoms/TodosAtoms";
 import { useNavigate } from "react-router-dom";
 
 

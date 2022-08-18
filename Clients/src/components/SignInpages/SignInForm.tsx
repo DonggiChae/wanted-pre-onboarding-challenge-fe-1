@@ -4,11 +4,11 @@ import { useMutation } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import {AxiosError} from 'axios'
-import { signInResponse, IAuthInPut, IAuthResponse } from "../../API/AuthApi";
+import { signInResponse, IAuthInPut, IAuthResponse, signUpResponse } from "../../API/AuthApi";
 
 
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
 
 
 const LogInFormContatiner = styled.div`
@@ -40,6 +40,9 @@ const SignInForm = () => {
 
   const SignIn = useMutation<IAuthResponse, AxiosError, IAuthInPut, unknown>(
     ((singnInInPut: IAuthInPut) => signInResponse(singnInInPut.email, singnInInPut.password)))
+  
+  const SignUp = useMutation<IAuthResponse, AxiosError, IAuthInPut, unknown>(
+    ((singnInInPut: IAuthInPut) => signUpResponse(singnInInPut.email, singnInInPut.password)))
 
   const onChange = (event:any) => {
     const {

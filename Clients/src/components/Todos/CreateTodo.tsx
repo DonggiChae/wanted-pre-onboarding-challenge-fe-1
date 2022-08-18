@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
 import { createTodoResponse, ITodoResponseDatas , ITodoInput, ITodo } from "../../API/TodosApi";
 
 import { useRecoilState } from "recoil";
-import { todoListAtom } from "../../Atoms";
+import { todoListAtom } from "../../Atoms/TodosAtoms";
 
 
 const Container = styled.div`

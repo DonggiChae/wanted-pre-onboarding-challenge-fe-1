@@ -4,7 +4,7 @@ import { useQueryClient ,useQuery, useMutation} from '@tanstack/react-query'
 
 import { AxiosError } from "axios";
 import { ITodo , ITodoUpdateInput , updateTodoResponse, ITodoResponseDatas} from "../../API/TodosApi";
-import { stateTodoUpdateAtom , todoListAtom} from "../../Atoms";
+import { stateTodoUpdateAtom , todoListAtom} from "../../Atoms/TodosAtoms";
 import { useRecoilState } from "recoil";
 
 const Container = styled.div`

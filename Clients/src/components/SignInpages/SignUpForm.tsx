@@ -8,7 +8,7 @@ import { signUpResponse, IAuthInPut, IAuthResponse } from "../../API/AuthApi";
 
 
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../../Atoms";
+import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
 
 
 const LogInFormContatiner = styled.div`

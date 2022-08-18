@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { ITodo, getTodoByIdResponse, ITodoResponseDatas } from "../../API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
-import { stateTodoUpdateAtom } from "../../Atoms";
+import { stateTodoUpdateAtom } from "../../Atoms/TodosAtoms";
 import { useRecoilState } from "recoil";
 
 const Container = styled.div`

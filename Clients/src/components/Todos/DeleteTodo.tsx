@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
 import { ITodo , deleteTodoResponse, ITodoResponseDatas } from "../../API/TodosApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { todoListAtom } from "../../Atoms";
+import { todoListAtom } from "../../Atoms/TodosAtoms";
 
 const Container = styled.div`
 
