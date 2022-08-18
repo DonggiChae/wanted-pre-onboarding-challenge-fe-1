@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { ResponseDatas, Todo } from "./API/TodosApi";
+import { ITodoResponseDatas , ITodo } from "./API/TodosApi";
 
 export const stateSignUpAtom = atom<boolean>({
   key: "stateSignUp",
@@ -16,7 +16,7 @@ export const stateTodoUpdateAtom = atom<boolean>({
   default: false,
 });
 
-export const todoListAtom = atom<Todo[]>({
+export const todoListAtom = atom<ITodo[]>({
   key: "todoListAtom",
   default: [
     {

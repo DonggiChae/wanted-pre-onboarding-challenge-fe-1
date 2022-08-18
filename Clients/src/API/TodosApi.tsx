@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios'
 
-export interface Todo {
+export interface ITodo {
   title: string;
   content: string;
   id: string;
@@ -8,10 +8,17 @@ export interface Todo {
   updatedAt: string;
 }
 
-export type TodoInput = Pick<Todo, "title" | "content">;
+export type ITodoInput = Pick<ITodo, "title" | "content">;
 
-export interface ResponseDatas {
-  data: Todo[]
+export interface ITodoUpdateInput {
+  title: string;
+  content: string;
+  id: string;
+}
+
+
+export interface ITodoResponseDatas {
+  data: ITodo[]
 }
 
 export const axiosConfig: AxiosRequestConfig = {
@@ -23,25 +30,23 @@ const client = axios.create(axiosConfig);
 client.defaults.headers.common['Authorization'] = localStorage.getItem('token') || ''
 
 export const getTodos = async () => {
-    const response = await client.get('')
+    const response = await client.get('/')
     return response.data
 }
 
-export const getTodoById = async (id: string) => {
-    const response = await client.get(`/${id}`)
-    return response.data
+export const createTodoResponse = async (title: string, content: string): Promise<ITodo> => {
+  const res = await client.post('/', { title, content })
+  return res.data.data
 }
 
-
-export const createTodo = async (title: string, content: string) => {
-    const response = await client.post('/', { title, content })
-    return response.data
+export const getTodoByIdResponse = async (id: string): Promise<ITodo> => {
+    const res= await client.get(`/${id}`)
+    return res.data.data
 }
 
-export const updateTodo = async (id: string, title: string, content: string) => {
-
-    const response = await client.put(`/${id}`, { title, content })
-    return response.data
+export const updateTodoResponse = async (id: string, title: string, content: string) => {
+    const res= await client.put(`/${id}`, { title, content })
+    return res.data.data
 }
 
 export const deleteTodo = async (id: string) => {

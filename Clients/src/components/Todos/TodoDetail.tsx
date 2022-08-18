@@ -1,8 +1,10 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
-import { Todo, getTodoById, ResponseDatas } from "../../API/TodosApi";
+
+import { AxiosError } from "axios";
+import { ITodo, getTodoByIdResponse, ITodoResponseDatas } from "../../API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
 import { stateTodoUpdateAtom } from "../../Atoms";
 import { useRecoilState } from "recoil";
@@ -44,23 +46,36 @@ interface tododetailProps {
 
 
 const TodoDetail = (props: tododetailProps) => {
-  const [ todoData , setTodoData] = useState<Todo | undefined>(undefined)
+  const [ todoData , setTodoData] = useState<ITodo | undefined>(undefined)
   const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
-  useEffect(() => {
-      getTodoById(props.toDoId).then((res)=>
-      setTodoData(res.data));
-  },[props])
   const onUpdateToggle = () => {
     setStateTodoUpdate((prev) => (!prev));
   }
+
+  const todoDetail = useMutation<ITodo, AxiosError, string, unknown>(
+    ((toDoId: string) => getTodoByIdResponse(toDoId)))
+
+  useEffect(() => {
+    todoDetail.mutate( props.toDoId , {
+      onSuccess: (res) => 
+        setTodoData(res)
+      });
+    }
+  ,[props])
+
   return (
     <Container>
       <Board>
         <UpdateButton onClick={onUpdateToggle}>UPDATE</UpdateButton>
         {stateTodoUpdate ? 
         <Board>
-          <UpdateTodo {...todoData}></UpdateTodo>
-          <UpdateButton onClick={onUpdateToggle}>Cancel</UpdateButton>
+          {todoData ?
+          <div>
+            <UpdateTodo {...todoData}></UpdateTodo>
+            <UpdateButton onClick={onUpdateToggle}>Cancel</UpdateButton> 
+          </div>
+          : 
+          <div></div>}
         </Board>
         : 
         <Board>

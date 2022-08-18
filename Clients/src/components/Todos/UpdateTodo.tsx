@@ -1,7 +1,9 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
-import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
-import { Todo , updateTodo, ResponseDatas} from "../../API/TodosApi";
+import { useQueryClient ,useQuery, useMutation} from '@tanstack/react-query'
+
+import { AxiosError } from "axios";
+import { ITodo , ITodoUpdateInput , updateTodoResponse, ITodoResponseDatas} from "../../API/TodosApi";
 import { stateTodoUpdateAtom , todoListAtom} from "../../Atoms";
 import { useRecoilState } from "recoil";
 
@@ -29,21 +31,27 @@ const Input = styled.input`
 
 
 
-const UpdateTodo = (props: any) => {
+const UpdateTodo = (props: ITodo) => {
   const queryClient = useQueryClient();
   const [title, setTitle] = useState(`${props.title}`);
   const [content, setContent] = useState(`${props.content}`);
   const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
-  const onUpdate = (event :any) => {
+  const updateTodo = useMutation<ITodo, AxiosError, ITodoUpdateInput, unknown>(
+    ((createTodoInPut) => updateTodoResponse(createTodoInPut.id, createTodoInPut.title, createTodoInPut.content)))
+
+  const onUpdate = useCallback((event :any) => {
     event.preventDefault()
-    updateTodo(props.id, title, content).then(
-      (res) => setStateTodoListAtom( 
-          stateTodoListAtom.map((todo) => 
-          (todo.id === props.id ? res.data : todo))
-          )
-      ).then(() => setStateTodoUpdate((prev) => (!prev)))
-  };
+    updateTodo.mutate({id: props.id, title: title, content: content} , {
+      onSuccess: (res) => {
+        setStateTodoListAtom( 
+              stateTodoListAtom.map((todo) => 
+              (todo.id === props.id ? res : todo))
+              )
+        setStateTodoUpdate(false)
+        }
+    })
+  },[title, content]);
 
   const onChange = (event: any) => {
     const {

@@ -1,7 +1,10 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
-import { useQueryClient } from '@tanstack/react-query'
-import { createTodo, ResponseDatas } from "../../API/TodosApi";
+import { useQueryClient, useMutation } from '@tanstack/react-query'
+
+import { AxiosError } from "axios";
+import { createTodoResponse, ITodoResponseDatas , ITodoInput, ITodo } from "../../API/TodosApi";
+
 import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../Atoms";
 
@@ -29,11 +32,19 @@ const CreateTodo = () => {
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
   const queryClient = useQueryClient();
 
+  const createTodo = useMutation<ITodo, AxiosError, ITodoInput, unknown>(
+    ((createTodoInPut: ITodoInput) => createTodoResponse(createTodoInPut.title, createTodoInPut.content)))
+
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      createTodo(title, content).then((res) => 
-      setStateTodoListAtom([...stateTodoListAtom, res.data]))
+      {
+        createTodo.mutate({title,content}, {
+          onSuccess: (res) => {
+            setStateTodoListAtom([...stateTodoListAtom, res]);
+          }
+        })
+      }
       setTitle("");
       setContent("");
     },
@@ -50,10 +61,6 @@ const CreateTodo = () => {
       setContent(value);
     }
   };
-
-  useEffect (() => {
-    
-  },[title, content]);
 
 
   return (

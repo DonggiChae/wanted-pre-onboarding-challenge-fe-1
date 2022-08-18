@@ -1,7 +1,7 @@
 import React, { useState , useEffect, useCallback} from "react";
 import styled from "styled-components";
 import { useQueryClient ,useQuery, useMutation, UseMutationResult} from '@tanstack/react-query'
-import { Todo , TodoInput , deleteTodo, ResponseDatas } from "../../API/TodosApi";
+import { ITodo , deleteTodo,ITodoResponseDatas } from "../../API/TodosApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../Atoms";
@@ -25,7 +25,7 @@ const DeleteTodo = (Id : any) => {
     e.preventDefault();
     deleteTodo( Id.toDoId );
     setStateTodoListAtom(
-      stateTodoListAtom.filter((todo: Todo) => todo.id !== Id.toDoId)
+      stateTodoListAtom.filter((todo: ITodo) => todo.id !== Id.toDoId)
     );
     if (Id.toDoId === todoID) {
       navigate('/todos');

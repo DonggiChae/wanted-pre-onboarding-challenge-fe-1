@@ -3,7 +3,7 @@ import styled from "styled-components";
 import fs from "fs/promises";
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
-import { Todo, ResponseDatas, getTodos, getTodoById } from "../../API/TodosApi";
+import { ITodo, ITodoResponseDatas, getTodos} from "../../API/TodosApi";
 import TodoDetail from "./TodoDetail";
 import CreateTodo from "./CreateTodo";
 import DeleteTodo from "./DeleteTodo";
@@ -46,7 +46,7 @@ const TodoList = () => {
   const [ createTodo, setCreateTodo] = useState(true)
   const [ toDoDetailId , setToDoDetailId ] = useState("");
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
-  const  { data: todos , isLoading }  = useQuery<ResponseDatas>(['todo'], getTodos);
+  const  { data: todos , isLoading }  = useQuery<ITodoResponseDatas>(['todo'], getTodos);
   const onTodoClicked = (id: string) => {
     setToDoDetailId(id);
     navigate(id);
@@ -90,7 +90,7 @@ const TodoList = () => {
         </Board>
         <Board>
           <CreateTodoToggleButton onClick={() => onCreateTodoToggle()}>+</CreateTodoToggleButton>
-          {createTodo ? <></>
+          { createTodo ? <></>
           : <CreateTodo></CreateTodo>}
         </Board>
         <Board>
