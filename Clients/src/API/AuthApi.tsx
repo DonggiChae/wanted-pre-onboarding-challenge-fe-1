@@ -1,17 +1,25 @@
 import axios from 'axios'
+import { StringLiteral } from 'typescript';
 
-export interface AuthResponse {
-  message: string;
-  token: string;
+const BASE_URL = 'http://127.0.0.1:8080/users'
+
+export interface IAuthInPut {
+  email: string;
+  password: string;
+}
+export interface IAuthResponse {
+  data: {
+    message: string;
+    token: string;
+  }
 }
 
 
-export const logIn = async (email: string, password: string) => {
-    const response = await axios.post('http://127.0.0.1:8080/users/login', { email, password })
-    return response.data
+export const signInResponse = async (email: string, password: string): Promise<IAuthResponse> => {
+  return await axios.post(`${BASE_URL}/login`, {email, password} )
 }
 
-export const signUp = async (email: string, password: string) => {
-    const response = await axios.post('http://127.0.0.1:8080/users/create', { email, password })
-    return response.data
+
+export const signUpResponse = async (email: string, password: string): Promise<IAuthResponse> => {
+  return await axios.post(`${BASE_URL}/create`, { email, password })
 }

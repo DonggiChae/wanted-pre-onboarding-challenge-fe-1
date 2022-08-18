@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
-import AuthForm from "../components/Auth/AuthForm";
+import SignInPage from "../components/SignInpages/SignInPage";
+import AuthForm from "../components/SignInpages/SignInPage";
 
 
 const Container = styled.div`
@@ -13,12 +14,12 @@ const Container = styled.div`
 `
 
 
-const Authorize = () => {
+const LogInPage = () => {
   return (
     <Container>
-      <AuthForm />
+      <SignInPage />
     </Container>
   ) 
 };
 
-export default Authorize;
+export default LogInPage;
