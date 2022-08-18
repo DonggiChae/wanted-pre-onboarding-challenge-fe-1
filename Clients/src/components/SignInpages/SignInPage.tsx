@@ -15,8 +15,8 @@ const LogInContatiner = styled.div`
   background-color: rgb(231, 246, 242);
   padding: 50px;
   border-radius: 10px;
-  width: 300px;
-  height: 230px;
+  width: 400px;
+  height: 330px;
 `;
 
 const SignUPlogo = styled.div`

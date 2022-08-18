@@ -10,3 +10,8 @@ export const hastokenAtom = atom<boolean>({
   key: "token",
   default: false,
 });
+
+export const hasErrorAtom = atom<boolean>({
+  key: "hasError",
+  default: false,
+});

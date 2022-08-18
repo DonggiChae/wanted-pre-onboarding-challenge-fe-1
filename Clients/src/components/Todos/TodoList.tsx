@@ -68,7 +68,7 @@ const TodoList = () => {
 
   return (
     <Container>
-      <Button onClick={ () => navigate(-1)}>Go 1 pages back</Button>
+      <Button onClick={ () => navigate(-1)}>Go 1 page back</Button>
       <Button onClick={ () => navigate(1) }>Go 1 Page forward</Button>
       <Board>
           {isLoading ? <Board></Board> 
