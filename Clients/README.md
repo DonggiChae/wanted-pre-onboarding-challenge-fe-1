@@ -35,7 +35,7 @@
 
 # Assignment 3 - React Query 사용하기
 
-- [ ] React Query 적용해서 API 호출 적용해보기
+- [x] React Query 적용해서 API 호출 적용해보기
 
 # 개선 사항
 
