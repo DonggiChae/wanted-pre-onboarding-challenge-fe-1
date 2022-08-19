@@ -1,6 +1,9 @@
-# 1) 클라이언트 구현 과제 진행 상황
+# 프리온보딩 프론트엔드 챌린지 8월
+## CRUD w React Query
 
-## Assignment 1 - Login / SignUp
+## Login / SignUp
+
+![LogInPage](https://user-images.githubusercontent.com/69336797/185669845-bc42f237-dc3b-48cf-9d76-76e74a343dfe.png)
 
 - /auth 경로에 로그인 / 회원가입 기능을 개발합니다
   - 로그인, 회원가입을 별도의 경로로 분리해도 무방합니다
