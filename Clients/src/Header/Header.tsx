@@ -62,10 +62,12 @@ function Header() {
   const resetTodoCreate = useResetRecoilState(stateCreateTodoAtom);
   const navigate = useNavigate();
   const  goTodoHome = () => {
-    resetTodoUpdate();
-    resetTodoDetail();
-    resetTodoCreate();
-    navigate("/todos");
+    if (localStorage.getItem('token')) {
+      resetTodoUpdate();
+      resetTodoDetail();
+      resetTodoCreate();
+      navigate("/todos");
+    }
   } 
   const onLogOut = () => {
     localStorage.clear();
