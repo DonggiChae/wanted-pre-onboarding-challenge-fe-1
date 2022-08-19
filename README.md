@@ -4,12 +4,14 @@
 ## Assignment 2 - Login / SignUp Pages
 
 ![LogInPage](https://user-images.githubusercontent.com/69336797/185669845-bc42f237-dc3b-48cf-9d76-76e74a343dfe.png)
-- Header 를 만들어서 우측 상단에 SignUP / SignIn 을 선택할 수 있게 하였습니다. 
+- Header 를 만들어서 우측 상단에 SignUP / SignIn 을 선택할 수 있게 하였습니다.
+
 ![LogInPage_Filled](https://user-images.githubusercontent.com/69336797/185671406-d3d29c30-cdba-4ca0-be9c-d39d669b6b4a.png)
 - 이메일 조건과 비밀번호 조건이 맞으면 'x' 표시가 사라지고 두개의 조건 충족시에 선택한 조건에 맞는 제출 버튼이 생기게 하였습니다. 
 - 응답으로 받은 토큰은 로컬 스토리지에 저장하였습니다. 
 - Header에서 Token의 유무를 검사하여 어느 페이지에서든 토큰이 사라지면 로그인 페이지로 넘어가도록 설계 하였습니다.
   - Token을 관리하는 법에 대해서는 추가적인 공부와 수정이 필요하다고 생각됩니다.
+ 
 ![SignUP_Result](https://user-images.githubusercontent.com/69336797/185676278-958c5085-fb9b-43d9-a7ee-4d5613d6eda3.png)
 - 회원 가입 결과와 Error는 버튼 및에 나타나게 하였습니다. 
   - alert를 사용하면 확인을 누르면 동작이 멈추기 때문에 이렇게 설정하였습니다.
