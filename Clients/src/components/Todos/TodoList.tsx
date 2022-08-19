@@ -1,6 +1,5 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
-import fs from "fs/promises";
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
 import { ITodo, ITodoResponseDatas, getTodos} from "../../API/TodosApi";
@@ -9,17 +8,40 @@ import CreateTodo from "./CreateTodo";
 import DeleteTodo from "./DeleteTodo";
 
 import { constSelector, useRecoilState } from "recoil";
-import { todoListAtom } from "../../Atoms/TodosAtoms";
+import { todoListAtom, stateCreateTodoAtom, stateTodoDetailAtom } from "../../Atoms/TodosAtoms";
 
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.div`
-
+  width: 400px;
+  height: 600px;
+  background-color: rgba(45, 51, 51, 1);
+  color: white;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 15px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: black;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+  }
 `
 
 
 const Board = styled.div`
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
 
 const CreateTodoToggleButton = styled.button`
@@ -35,28 +57,27 @@ interface todotitleProps {
 const TodoTitle = styled.div<todotitleProps>`
 
 `;
-const Button = styled.button`
-`
 
 
 
 const TodoList = () => {
   const navigate = useNavigate();
   const { todoID } = useParams();
-  const [ createTodo, setCreateTodo] = useState(true)
   const [ toDoDetailId , setToDoDetailId ] = useState("");
+  const [ stateDetailAtom, setStateDetailAtom ] = useRecoilState(stateTodoDetailAtom);
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
+  const [ createTodoAtom, setCreateTodoAtom ] = useRecoilState(stateCreateTodoAtom);
   const  { data: todos , isLoading }  = useQuery<ITodoResponseDatas>(['todo'], getTodos);
   const onTodoClicked = (id: string) => {
     setToDoDetailId(id);
     navigate(id);
   };
   
-  const onCreateTodoToggle = () => setCreateTodo((prev) => (!prev));
+  const onCreateTodoToggle = () => setCreateTodoAtom((prev) => (!prev));
 
   useEffect(() => {
     if (todoID){
-      setToDoDetailId(todoID);
+      setStateDetailAtom(todoID);
     }
   },[navigate, TodoDetail])
 
@@ -68,9 +89,6 @@ const TodoList = () => {
 
   return (
     <Container>
-      <Button onClick={ () => navigate(-1)}>Go 1 page back</Button>
-      <Button onClick={ () => navigate(1) }>Go 1 Page forward</Button>
-      <Board>
           {isLoading ? <Board></Board> 
           : stateTodoListAtom.map((toDo, index: number ) => (
             <Board> 
@@ -85,16 +103,11 @@ const TodoList = () => {
             </Board> 
           ))
         }
-        </Board>
-        <Board>
-          <CreateTodoToggleButton onClick={() => onCreateTodoToggle()}>+</CreateTodoToggleButton>
-          { createTodo ? <></>
-          : <CreateTodo></CreateTodo>}
-        </Board>
-        <Board>
-          { toDoDetailId ? <TodoDetail toDoId={toDoDetailId} />
-          : <></>}
-        </Board>
+        <CreateTodoToggleButton onClick={() => onCreateTodoToggle()}>
+          <FontAwesomeIcon icon={faPlus} />
+        </CreateTodoToggleButton>
+        { createTodoAtom ? <CreateTodo></CreateTodo>
+        : <></>}
     </Container>
 
   ) 

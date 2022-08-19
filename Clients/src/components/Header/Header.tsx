@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
 import { useNavigate } from "react-router-dom";
+
+import { useRecoilState, useResetRecoilState} from "recoil";
+import { stateSignUpAtom, hastokenAtom, } from "../../Atoms/AuthAtoms";
+import { stateTodoUpdateAtom, stateTodoDetailAtom, stateCreateTodoAtom} from "../../Atoms/TodosAtoms";
 
 
 const Nav = styled.nav`
@@ -55,8 +57,14 @@ const TodoSignOut = styled.div`
 function Header() {
   const [ stateSignUp , setStateSignUP ] = useRecoilState<boolean>(stateSignUpAtom);
   const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
+  const resetTodoUpdate = useResetRecoilState(stateTodoUpdateAtom);
+  const resetTodoDetail = useResetRecoilState(stateTodoDetailAtom);
+  const resetTodoCreate = useResetRecoilState(stateCreateTodoAtom);
   const navigate = useNavigate();
   const  goTodoHome = () => {
+    resetTodoUpdate();
+    resetTodoDetail();
+    resetTodoCreate();
     navigate("/todos");
   } 
   const onLogOut = () => {

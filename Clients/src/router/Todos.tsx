@@ -1,6 +1,10 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import TodoList from "../components/Todos/TodoList";
+import TodoDetail from "../components/Todos/TodoDetail";
+
+import { useRecoilState } from "recoil";
+import { stateTodoDetailAtom } from "../Atoms/TodosAtoms";
 
 
 const Container = styled.div`
@@ -13,11 +17,23 @@ const Container = styled.div`
   color: black;
 `
 
+const TododetailContainer = styled.div`
+  width: 400px;
+  height: 600px;
+  background-color: rgba(45, 51, 51, 1);
+  color: white;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 15px;
+`
 
 const Todos = () => {
+  const [ stateDetailAtom, setStateTodoDetailAtom ] = useRecoilState(stateTodoDetailAtom);
   return (
     <Container>
       <TodoList />
+      { stateDetailAtom ? <TodoDetail toDoId={stateDetailAtom} />
+          : <TododetailContainer></TododetailContainer>}
     </Container>
   ) 
 };

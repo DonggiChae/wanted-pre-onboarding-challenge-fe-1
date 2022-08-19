@@ -8,12 +8,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../Atoms/TodosAtoms";
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+
 const Container = styled.div`
 
 `
 
 const Button = styled.button`
-
+  background-color: transparent;
+  border: none;
+  color: pink;
 `
 
 interface toDoIdProps {
@@ -45,7 +51,9 @@ const DeleteTodo = (Id : toDoIdProps) => {
 
   return (
     <Container>
-        <Button onClick={onDelete}>Delete</Button>
+        <Button onClick={onDelete}>
+          <FontAwesomeIcon icon={faXmark} />
+        </Button>
     </Container>
 
   ) 

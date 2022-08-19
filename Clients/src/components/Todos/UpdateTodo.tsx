@@ -8,11 +8,22 @@ import { stateTodoUpdateAtom , todoListAtom} from "../../Atoms/TodosAtoms";
 import { useRecoilState } from "recoil";
 
 const Container = styled.div`
+  width: 324px;
+  height: 330px;
+  background-color: rgba(45, 51, 51, 1);
+  display: block;
+  border-radius: 15px;
 
 `
 
 const Button = styled.button`
-
+  font-weight: 300;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  width: 340px;
+  margin-top: 20px;
+  border-radius: 3px;
 `
 interface todotitleProps {
   index: number,
@@ -26,7 +37,33 @@ const TodoForm = styled.form`
 `;
 
 
-const Input = styled.input`
+const TodoTitleInput = styled.input`
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #999;
+  color: white;
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  outline: 0;
+  padding: 0 12px 10px 12px;
+  width: 100%;
+`
+const TodoContentTextarea = styled.textarea`
+  resize: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #999;
+  color: white;
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  outline: 0;
+  padding: 0 12px 10px 12px;
+  width: 100%;
+  height: 350px;
 `
 
 
@@ -37,6 +74,11 @@ const UpdateTodo = (props: ITodo) => {
   const [content, setContent] = useState(`${props.content}`);
   const [ stateTodoUpdate , setStateTodoUpdate ] = useRecoilState<boolean>(stateTodoUpdateAtom);
   const [ stateTodoListAtom, setStateTodoListAtom ] = useRecoilState(todoListAtom);
+
+  const onUpdateToggle = () => {
+    setStateTodoUpdate((prev) => (!prev));
+  }
+
   const updateTodo = useMutation<ITodo, AxiosError, ITodoUpdateInput, unknown>(
     ((createTodoInPut) => updateTodoResponse(createTodoInPut.id, createTodoInPut.title, createTodoInPut.content)))
 
@@ -44,10 +86,10 @@ const UpdateTodo = (props: ITodo) => {
     event.preventDefault()
     updateTodo.mutate({id: props.id, title: title, content: content} , {
       onSuccess: (res) => {
-        setStateTodoListAtom( 
-              stateTodoListAtom.map((todo) => 
-              (todo.id === props.id ? res : todo))
-              )
+        setStateTodoListAtom(
+          stateTodoListAtom.map((todo) => 
+          (todo.id === props.id ? res : todo))
+          )
         setStateTodoUpdate(false)
         }
     })
@@ -67,24 +109,24 @@ const UpdateTodo = (props: ITodo) => {
 
   return (
     <Container>
-        <TodoForm onSubmit={onUpdate}>
-        <Input
+      <TodoForm onSubmit={onUpdate}>
+        <TodoTitleInput
         name="title"
         type="title"
         placeholder="title"
         required
         value={title}
         onChange={onChange}
-        ></Input>
-        <Input
+        ></TodoTitleInput>
+        <TodoContentTextarea
         name="content"
-        type="content"
         placeholder="content"
         required
         value={content}
         onChange={onChange}
-        ></Input>
+        ></TodoContentTextarea>
         <Button type='submit'>Save</Button>
+        <Button onClick={onUpdateToggle}>Cancel</Button>
       </TodoForm>
     </Container>
 
