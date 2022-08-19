@@ -68,6 +68,10 @@
 
 - [x] React Query 적용해서 API 호출 적용해보기
 
+# Assignment 4 - Redux 사용하기
+
+- 현재는 Recoil을 적용하여 사용하였습니다.
+ - Redux에 대한 공부와 Recoil과의 비교를 한 후에 어떤 것을 사용할 지 결정을 해야할 것 같습니다.
 
 ## 폴더 구조
 ```bash
