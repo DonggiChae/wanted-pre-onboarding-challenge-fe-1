@@ -50,7 +50,7 @@ const InputBox = styled.div`
 `
 const StateConfirm = styled.div`
   padding: 7px 0;
-  color: red;
+  color: ${(props) => props.theme.errorRed};
   margin-top: 10px;
 `
 
@@ -58,7 +58,7 @@ const SignInbutton = styled.button`
   background-color: #2C3333;
   outline: none;
   border: 0;
-  color: white;
+  color: ${(props) => props.theme.fontColor};
   padding:10px 20px;
   text-transform:uppercase;
   margin-top:20px;

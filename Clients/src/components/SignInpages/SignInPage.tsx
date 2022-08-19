@@ -12,7 +12,7 @@ import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
 const LogInContatiner = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgb(231, 246, 242);
+  background-color: ${(props) => props.theme.backGroundColorGreen};
   padding: 50px;
   border-radius: 10px;
   width: 400px;
