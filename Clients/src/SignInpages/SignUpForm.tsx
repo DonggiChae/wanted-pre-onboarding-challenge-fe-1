@@ -11,7 +11,7 @@ import { useRecoilState } from "recoil";
 import { stateSignUpAtom, hastokenAtom , hasErrorAtom} from "./Atoms/AuthAtoms";
 
 import SignInErrorModal from "./Modals/SignInErrorModal";
-
+import CompleteSignUp from "./Modals/CompleteSignUP";
 
 const LogInFormContatiner = styled.div`
   display: flex;
@@ -77,9 +77,9 @@ const SignUpForm = () => {
   const [confirmPassword, setConfirmPassword] = useState(false);
   const regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
   const [Error, setError] = useState<any>("");
+  const [ message, setMessage] = useState<any>("");
   const [ statehastokenAtom, setStatehastokenAtom ] = useRecoilState<boolean>(hastokenAtom);
   const [ statehasErrorAtom, setStatehasErrorAtom ] = useRecoilState<boolean>(hasErrorAtom);
-  const navigate = useNavigate();
   
   const SignUp = useMutation<IAuthResponse, AxiosError, IAuthInPut, unknown>(
     ((singnInInPut: IAuthInPut) => signUpResponse(singnInInPut.email, singnInInPut.password)))
@@ -102,11 +102,8 @@ const SignUpForm = () => {
       SignUp.mutate({email,password}, {
         onSuccess: (res) => {
           const { message, token } = res.data;
-          localStorage.setItem('token', token);
-          setStatehastokenAtom(true);
-          if (token) {
-                navigate("/todos");
-              }
+          
+          setMessage(message);
         },
         onError: (err) => {
           setStatehasErrorAtom(true);
@@ -117,9 +114,12 @@ const SignUpForm = () => {
   };
 
   useEffect (() => {
+    {(regEmail.test(email)) ? setConfirmEmail(true) : setConfirmEmail(false)}
+    {(password.length > 7) ? setConfirmPassword(true) : setConfirmPassword(false)}
     {(regEmail.test(email) && password.length > 7) ? 
       setSubmitButton(true) : setSubmitButton(false)}
       setStatehasErrorAtom(false);
+      setMessage("");
   },[password, email]);
   return (
       <LogInFormContatiner>
@@ -163,6 +163,10 @@ const SignUpForm = () => {
           : <div></div>}
           {statehasErrorAtom ? <div>
             <SignInErrorModal Error={Error} />
+            </div>
+          : <div></div>}
+          {message ? <div>
+            <CompleteSignUp Error={message} />
             </div>
           : <div></div>}
         </LogInForm>
