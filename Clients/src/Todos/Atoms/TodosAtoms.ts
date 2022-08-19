@@ -19,12 +19,5 @@ export const stateCreateTodoAtom = atom<boolean>({
 export const todoListAtom = atom<ITodo[]>({
   key: "todoListAtom",
   default: [
-    {
-      title: "",
-      content: "",
-      id: "",
-      createdAt: "",
-      updatedAt: "",
-    },
   ]
 });
