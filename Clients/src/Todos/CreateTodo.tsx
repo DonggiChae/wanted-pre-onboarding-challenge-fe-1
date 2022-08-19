@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 
 import { AxiosError } from "axios";
-import { createTodoResponse, ITodoResponseDatas , ITodoInput, ITodo } from "../../API/TodosApi";
+import { createTodoResponse, ITodoResponseDatas , ITodoInput, ITodo } from "./API/TodosApi";
 
 import { useRecoilState } from "recoil";
-import { todoListAtom, stateCreateTodoAtom } from "../../Atoms/TodosAtoms";
+import { todoListAtom, stateCreateTodoAtom } from "./Atoms/TodosAtoms";
 
 
 const Container = styled.div`

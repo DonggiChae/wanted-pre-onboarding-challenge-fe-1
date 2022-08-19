@@ -2,13 +2,13 @@ import React, { useState , useEffect} from "react";
 import styled from "styled-components";
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
-import { ITodo, ITodoResponseDatas, getTodos} from "../../API/TodosApi";
+import { ITodo, ITodoResponseDatas, getTodos} from "./API/TodosApi";
 import TodoDetail from "./TodoDetail";
 import CreateTodo from "./CreateTodo";
 import DeleteTodo from "./DeleteTodo";
 
 import { constSelector, useRecoilState } from "recoil";
-import { todoListAtom, stateCreateTodoAtom, stateTodoDetailAtom } from "../../Atoms/TodosAtoms";
+import { todoListAtom, stateCreateTodoAtom, stateTodoDetailAtom } from "./Atoms/TodosAtoms";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'

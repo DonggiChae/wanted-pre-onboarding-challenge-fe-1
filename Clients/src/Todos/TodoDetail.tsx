@@ -4,9 +4,9 @@ import { useQuery, useMutation } from '@tanstack/react-query'
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AxiosError } from "axios";
-import { ITodo, getTodoByIdResponse, ITodoResponseDatas } from "../../API/TodosApi";
+import { ITodo, getTodoByIdResponse, ITodoResponseDatas } from "./API/TodosApi";
 import UpdateTodo from "./UpdateTodo";
-import { stateTodoUpdateAtom, stateTodoDetailAtom } from "../../Atoms/TodosAtoms";
+import { stateTodoUpdateAtom, stateTodoDetailAtom } from "./Atoms/TodosAtoms";
 import { useRecoilState } from "recoil";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

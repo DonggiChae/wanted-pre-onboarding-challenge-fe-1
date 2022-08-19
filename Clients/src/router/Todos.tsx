@@ -1,10 +1,10 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
-import TodoList from "../components/Todos/TodoList";
-import TodoDetail from "../components/Todos/TodoDetail";
+import TodoList from "../Todos/TodoList";
+import TodoDetail from "../Todos/TodoDetail";
 
 import { useRecoilState } from "recoil";
-import { stateTodoDetailAtom } from "../Atoms/TodosAtoms";
+import { stateTodoDetailAtom } from "../Todos/Atoms/TodosAtoms";
 
 
 const Container = styled.div`

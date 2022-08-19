@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from "react";
 import styled from "styled-components";
-import SignInPage from "../components/SignInpages/SignInPage";
-import AuthForm from "../components/SignInpages/SignInPage";
+import SignInPage from "../SignInpages/SignInPage";
+import AuthForm from "../SignInpages/SignInPage";
 
 
 const Container = styled.div`

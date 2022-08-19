@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useRecoilState, useResetRecoilState} from "recoil";
-import { stateSignUpAtom, hastokenAtom, } from "../../Atoms/AuthAtoms";
-import { stateTodoUpdateAtom, stateTodoDetailAtom, stateCreateTodoAtom} from "../../Atoms/TodosAtoms";
+import { stateSignUpAtom, hastokenAtom, } from "../SignInpages/Atoms/AuthAtoms";
+import { stateTodoUpdateAtom, stateTodoDetailAtom, stateCreateTodoAtom} from "../Todos/Atoms/TodosAtoms";
 
 
 const Nav = styled.nav`

@@ -7,7 +7,7 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom } from "../../Atoms/AuthAtoms";
+import { stateSignUpAtom, hastokenAtom } from "./Atoms/AuthAtoms";
 
 const LogInContatiner = styled.div`
   display: flex;

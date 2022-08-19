@@ -4,13 +4,13 @@ import { useMutation } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import {AxiosError} from 'axios'
-import { signUpResponse, IAuthInPut, IAuthResponse } from "../../API/AuthApi";
+import { signUpResponse, IAuthInPut, IAuthResponse } from "./API/AuthApi";
 
 
 import { useRecoilState } from "recoil";
-import { stateSignUpAtom, hastokenAtom , hasErrorAtom} from "../../Atoms/AuthAtoms";
+import { stateSignUpAtom, hastokenAtom , hasErrorAtom} from "./Atoms/AuthAtoms";
 
-import SignInErrorModal from "../../Modals/SignInErrorModal";
+import SignInErrorModal from "./Modals/SignInErrorModal";
 
 
 const LogInFormContatiner = styled.div`

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useQueryClient ,useQuery, useMutation} from '@tanstack/react-query'
 
 import { AxiosError } from "axios";
-import { ITodo , deleteTodoResponse, ITodoResponseDatas } from "../../API/TodosApi";
+import { ITodo , deleteTodoResponse, ITodoResponseDatas } from "./API/TodosApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { todoListAtom } from "../../Atoms/TodosAtoms";
+import { todoListAtom } from "./Atoms/TodosAtoms";
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
