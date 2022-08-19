@@ -68,12 +68,41 @@
 
 - [x] React Query 적용해서 API 호출 적용해보기
 
-# 개선 사항
 
-## 과제 참고 사항
-
-1. 로컬 서버를 실행했을 때 생성되는 `db/db.json`이 DB 역할을 하게 됩니다. 해당 파일을 삭제하면 DB는 초기화 됩니다.
-
-2. 로그인 / 회원 가입 기능은 유저를 DB에 추가하고 JWT 토큰을 응답으로 돌려줄 뿐, 실제 유저별로 Todo 목록을 관계 지어 관리하지는 않습니다. (모든 유저가 하나의 Todo를 가짐)
-
-3. 로그아웃은 클라이언트 단에서 localStorage에 저장된 token을 삭제하는 방식으로 간단히 구현해주세요.
+## 폴더 구조
+```bash
+src
+ ┣ Header
+ ┃ ┗ Header.tsx
+ ┣ router
+ ┃ ┣ SignIn.tsx
+ ┃ ┗ Todos.tsx
+ ┣ SignInpages
+ ┃ ┣ API
+ ┃ ┃ ┗ AuthApi.tsx
+ ┃ ┣ Atoms
+ ┃ ┃ ┗ AuthAtoms.ts
+ ┃ ┣ Modals
+ ┃ ┃ ┣ CompleteSignUP.tsx
+ ┃ ┃ ┗ SignInErrorModal.tsx
+ ┃ ┣ SignInForm.tsx
+ ┃ ┣ SignInPage.tsx
+ ┃ ┗ SignUpForm.tsx
+ ┣ Styles
+ ┃ ┗ GlobalStyles.tsx
+ ┣ Theme
+ ┃ ┣ styled.d.ts
+ ┃ ┗ theme.ts
+ ┣ Todos
+ ┃ ┣ API
+ ┃ ┃ ┗ TodosApi.tsx
+ ┃ ┣ Atoms
+ ┃ ┃ ┗ TodosAtoms.ts
+ ┃ ┣ CreateTodo.tsx
+ ┃ ┣ DeleteTodo.tsx
+ ┃ ┣ TodoDetail.tsx
+ ┃ ┣ TodoList.tsx
+ ┃ ┗ UpdateTodo.tsx
+ ┣ App.tsx
+ ┗ index.tsx
+ ```
