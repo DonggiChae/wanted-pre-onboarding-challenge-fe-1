@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 const Container = styled.div`
   width: 324px;
   height: 330px;
-  background-color: rgba(45, 51, 51, 1);
+  background-color: ${(props) => props.theme.backGroundColorDarkGreen};
   display: block;
   border-radius: 15px;
 

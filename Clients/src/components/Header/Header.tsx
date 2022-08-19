@@ -17,8 +17,8 @@ const Nav = styled.nav`
   font-size: 20px;
   font-weight: 500;
   padding: 20px 60px;
-  color: white;
-  background-color: rgb(44, 51, 51);
+  color: ${(props) => props.theme.fontColor};
+  background-color: ${(props) => props.theme.backGroundColorDarkGreen};
 `;
 
 const Col = styled.div`

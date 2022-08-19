@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import GlobalStyle from './GlobalStyles'
 import { RecoilRoot } from "recoil";
+import { ThemeProvider } from "styled-components";
+import { theme } from './Theme/theme';
 
 
 const root = ReactDOM.createRoot(
@@ -11,8 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-          <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
           <App />
+      </ThemeProvider>
     </RecoilRoot>
   </React.StrictMode>
 );

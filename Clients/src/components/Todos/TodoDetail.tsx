@@ -15,7 +15,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 const Container = styled.div`
   width: 400px;
   height: 600px;
-  background-color: rgba(45, 51, 51, 1);
+  background-color: ${(props) => props.theme.backGroundColorDarkGreen};
   color: white;
   margin: 20px;
   padding: 30px;

@@ -16,8 +16,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 const Container = styled.div`
   width: 400px;
   height: 600px;
-  background-color: rgba(45, 51, 51, 1);
-  color: white;
+  background-color: ${(props) => props.theme.backGroundColorDarkGreen};
+  color: ${(props) => props.theme.fontColor};
   margin: 20px;
   padding: 30px;
   border-radius: 15px;

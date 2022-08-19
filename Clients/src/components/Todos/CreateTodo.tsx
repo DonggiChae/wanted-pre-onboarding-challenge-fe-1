@@ -16,7 +16,7 @@ const Container = styled.div`
   height: 330px;
   left: 40%;
   top: 30%;
-  background-color: rgba(45, 51, 51, 1);
+  background-color: ${(props) => props.theme.backGroundColorDarkGreen};
   padding: 20px;
   display: block;
   border: solid 0.3em;
@@ -53,7 +53,7 @@ const Input = styled.input`
   background: transparent;
   border: 0;
   border-bottom: 1px solid #999;
-  color: white;
+  color: ${(props) => props.theme.fontColor};
   display: block;
   font-size: 1.2rem;
   margin-top: 24px;
@@ -69,7 +69,7 @@ const Textarea = styled.textarea`
   background: transparent;
   border: 0;
   border-bottom: 1px solid #999;
-  color: white;
+  color: ${(props) => props.theme.fontColor};
   display: block;
   font-size: 1.2rem;
   margin-top: 24px;
