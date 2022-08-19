@@ -1,7 +1,7 @@
 # 프리온보딩 프론트엔드 챌린지 8월
 - CRUD w React Query
 
-## Assignment 2 - Login / SignUp Pages
+## Assignment 1 - Login / SignUp Pages
 
 ![LogInPage](https://user-images.githubusercontent.com/69336797/185669845-bc42f237-dc3b-48cf-9d76-76e74a343dfe.png)
 - Header 를 만들어서 우측 상단에 SignUP / SignIn 을 선택할 수 있게 하였습니다.
@@ -19,12 +19,17 @@
 
 ## Assignment 2 - Todo List Page
 
-- Todo List API를 호출하여 Todo List CRUD 기능을 구현해주세요
-  - [x] 목록 / 상세 영역으로 나누어 구현해주세요
-  - [x] Todo 목록을 볼 수 있습니다.
-  - [x] Todo 추가 버튼을 클릭하면 할 일이 추가 됩니다.
-  - [x] Todo 수정 버튼을 클릭하면 수정 모드를 활성화하고, 수정 내용을 제출하거나 취소할 수 있습니다.
-  - [x] Todo 삭제 버튼을 클릭하면 해당 Todo를 삭제할 수 있습니다.
+![TodoPAge2](https://user-images.githubusercontent.com/69336797/185677568-7f923bdd-a059-408f-87bf-612e389f0dc3.png)
+
+- 왼쪽은 목록 / 오늘쪽은 상세 영역으로 설정하였습니다.
+- 목록 리스트의 마지막에 있는 "+"를 통해서 ToDo를 생성할 수 있습니다.
+- 리스트의 이름 옆에 'X'를 클릭해서 리스트를 한개씩 삭제할 수 있습니다.
+- 목록에서 제목을 클릭하면 상세영역을 확인할 수 있습니다.
+
+![TodoUpdate](https://user-images.githubusercontent.com/69336797/185678353-9ecd7f96-41d2-4781-8092-50ea43e59e07.png)
+
+- 상세영역에서 Update 번튼을 통해서 없데이트 화면으로 넘어가 업데이트할 수 있습니다. 
+
 - 한 화면 내에서 Todo List와 개별 Todo의 상세를 확인할 수 있도록 해주세요.
   - [x] 새로고침을 했을 때 현재 상태가 유지되어야 합니다.
   - [x] 개별 Todo를 조회 순서에 따라 페이지 뒤로가기를 통하여 조회할 수 있도록 해주세요.
