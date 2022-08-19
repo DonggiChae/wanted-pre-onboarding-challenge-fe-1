@@ -10,7 +10,11 @@
 - 응답으로 받은 토큰은 로컬 스토리지에 저장하였습니다. 
 - Header에서 Token의 유무를 검사하여 어느 페이지에서든 토큰이 사라지면 로그인 페이지로 넘어가도록 설계 하였습니다.
   - Token을 관리하는 법에 대해서는 추가적인 공부와 수정이 필요하다고 생각됩니다.
- 
+![SignUP_Result](https://user-images.githubusercontent.com/69336797/185676278-958c5085-fb9b-43d9-a7ee-4d5613d6eda3.png)
+- 회원 가입 결과와 Error는 버튼 및에 나타나게 하였습니다. 
+  - alert를 사용하면 확인을 누르면 동작이 멈추기 때문에 이렇게 설정하였습니다.
+  - useMutation의 onSuccess와 onError를 통해 결과를 나타내었습니다.
+
 ## Assignment 2 - Todo List Page
 
 - Todo List API를 호출하여 Todo List CRUD 기능을 구현해주세요
